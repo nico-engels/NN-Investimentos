@@ -1,0 +1,53 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Lançamentos - Editar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= lancamento.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Data:</td>
+            <td><input name="data" type="date" value="<%= lancamento.data_fmt %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Aplicação:</td>
+            <td>
+              <select name="id_aplicacao">
+              <% for (var i = 0; i < aplicacoes.length; i++) { %>
+                <option value="<%= aplicacoes[i].id %>" <%= aplicacoes[i].sel %>><%= aplicacoes[i].nome_fmt %></option>
+              <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Natureza:</td>
+            <td>
+              <input name="natureza" type="radio" value="C" <%= lancamento.credito_chk %>>Crédito</input>
+              <input name="natureza" type="radio" value="D" <%= lancamento.debito_chk %>>Débito</input>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Tipo:</td>
+            <td>
+              <select name="tipo">
+              <% for (var i = 0; i < tipos.length; i++) { %>
+                <option value="<%= tipos[i].id %>" <%= tipos[i].sel %>><%= tipos[i].desc %></option>
+              <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Valor:</td>
+            <td><input name="valor" type="text" size="11" maxlength="10" value="<%= lancamento.valor_fmt %>" /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><a href="../apagar/<%= lancamento.id %>"><button type="button">Apagar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

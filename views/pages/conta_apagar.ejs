@@ -1,0 +1,65 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Contas - Apagar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= conta.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Alias:</td>
+            <td colspan="3"><input class="form_dado_leitura" type="text" size="16" maxlength="15" value="<%= conta.alias %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Pessoa:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura">
+                <option><%= conta.pessoa.apelido %> (<%= conta.pessoa.nome %>)</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Banco:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura">
+                <option><%= conta.banco.codigo %> - <%= conta.banco.nome %></option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Agência:</td>
+            <td><input class="form_dado_leitura" type="text" size="8" maxlength="10" value="<%= conta.agencia %>" readonly /></td>
+            <td class="form_label">Conta:</td>
+            <td><input class="form_dado_leitura" type="text" size="11" maxlength="10" value="<%= conta.numero %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Início:</td>
+            <td><input class="form_dado_leitura" type="date" value="<%= conta.inicio_fmt %>" readonly /></td>
+            <td class="form_label">Fim:</td>
+            <td><input class="form_dado_leitura" type="date" value="<%= conta.fim_fmt %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Modalidade:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura">
+                <option><%= modalidade_fmt %></option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Aplicação Padrão<br/>para Depósitos:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura">
+                <option><%= aplicacao_classes_fmt %></option>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <p>Tem certeza que deseja excluir o registro?</p>
+        <table>
+          <tr>
+            <td><a href="../editar/<%= conta.id %>"><button type="button">Voltar</button></a></td>
+            <td><input value="Confirmar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

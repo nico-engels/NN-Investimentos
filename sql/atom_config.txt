@@ -1,0 +1,29 @@
+"*":
+  core:
+    audioBeep: false
+    automaticallyUpdate: false
+    closeEmptyWindows: false
+    disabledPackages: [
+      "autocomplete-atom-api"
+      "autocomplete-css"
+      "autocomplete-html"
+      "autocomplete-plus"
+      "autocomplete-snippets"
+      "spell-check"
+    ]
+    telemetryConsent: "no"
+    themes: [
+      "atom-light-ui"
+      "atom-light-syntax"
+    ]
+  editor:
+    preferredLineLength: 120
+    tabType: "soft"
+  "exception-reporting":
+    userId: "4b0fa4f9-ea4b-473a-b5ae-ced8c4971ec3"
+  "selection-highlight":
+    lightTheme: true
+    onlyHighlightWholeWords: true
+    timeout: 200
+  welcome:
+    showOnStartup: false

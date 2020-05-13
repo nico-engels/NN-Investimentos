@@ -1,0 +1,57 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Depositar - Editar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= deposito.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Data:</td>
+            <td><input class="form_dado_leitura" type="date" value="<%= deposito.data_ref_fmt %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Pessoa:</td>
+            <td>
+              <select class="form_dado_leitura"><option><%= deposito.pessoa_fmt %></option></select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Aplicação:</td>
+            <td>
+              <select class="form_dado_leitura"><option><%= deposito.apl_fmt %></option></select>
+            </td>
+            <td>
+              <select class="form_dado_leitura" style="display:<%= deposito.poup ? 'inline' : 'none' %>">
+                  <option><%= deposito.aplicacao.dia_ref %></option>
+              </select>
+            </td>
+            <td class="form_label">Saldo na data:</td>
+            <td><input id="saldo_atual" class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="<%= deposito.saldo_fmt %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Valor:</td>
+            <td><input id="entrada" name="entrada" class="form_dado_numero" type="text" size="11" maxlength="10" value="<%= deposito.entrada_fmt %>"
+                       onchange="calcula_saldo_final()" /></td>
+            <td></td>
+            <td class="form_label">Saldo final:</td>
+            <td><input id="saldo_final" class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="<%= deposito.saldo_depois_fmt %>" readonly /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><a href="../apagar/<%= deposito.id %>"><button type="button">Apagar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>
+      <script>
+        const ptbr_nfmt = new Intl.NumberFormat('pt-BR', { style: 'decimal', minimumFractionDigits: 2 })
+        function calcula_saldo_final() {
+          var saldo_atual = Number(document.getElementById('saldo_atual').value.replace('.', '').replace(',', '.'))
+          var entrada =     Number(document.getElementById('entrada').value.replace('.', '').replace(',', '.'))
+          document.getElementById('saldo_final').value = ptbr_nfmt.format(saldo_atual + entrada)
+        }
+      </script>

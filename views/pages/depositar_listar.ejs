@@ -1,0 +1,40 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Depositar - Listar</p>
+      <table>
+        <tr class="listar_linha_cabecalho">
+          <td class="listar_cabecalho_selec"></td>
+          <td class="listar_cel">Aplicação</td>
+          <td class="listar_cel">Data</td>
+          <td class="listar_cel">Tipo</td>
+          <td class="listar_cel">Crédito</td>
+        </tr>
+        <% for (var i = 0; i < lancamentos.length; i++) { %>
+        <tr class="listar_linha" onclick="window.location = '/depositar/editar/<%= lancamentos[i].id %>'"
+            onmouseenter="this.children[0].style.color = 'black'" onmouseleave="this.children[0].style.color = 'transparent'">
+          <td class="listar_cel_seta">&gt;</td>
+          <td class="listar_cel"><%= lancamentos[i].aplicacao_fmt %></td>
+          <td class="listar_cel"><%= lancamentos[i].data_fmt %></td>
+          <td class="listar_cel"><%= lancamentos[i].tipo_fmt %></td>
+          <td class="listar_cel_num"><%= lancamentos[i].entrada_fmt %></td>
+        </tr>
+        <% } %>
+        <tr class="listar_linha_rodape">
+          <td colspan="7">Página <%= n_paginas.atual %>/<%= n_paginas.num %> - Mostrando <%= n_paginas.por_pagina %> de <%= n_paginas.total %> registros.</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <td>Ir para a página:</td>
+          <td>
+            <select onchange="window.location = '/depositar/listar/' + this.value">
+              <% for (var i = 1; i <= n_paginas.num; i++) { %>
+                <option value="<%= i %>" <%= (i == n_paginas.atual) ? 'selected' : '' %>><%= i %></option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <br/>
+      <a href="/"><button>Voltar</button></a>
+      <a href="/depositar/cadastrar"><button>Cadastrar</button></a>

@@ -1,0 +1,30 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Bancos - Editar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= banco.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Código:</td>
+            <td><input class="form_dado_leitura" name="cod" type="text" size="4" value="<%= banco.codigo %>" readonly/></td>
+          </tr>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input name="nome" type="text" size="50" value="<%= banco.nome %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">CNPJ:</td>
+            <td><input name="cnpj" type="text" size="19" maxlength="18" value="<%= banco.cnpj %>" /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><a href="../apagar/<%= banco.id %>"><button type="button">Apagar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

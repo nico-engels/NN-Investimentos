@@ -1,0 +1,25 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Pessoas - Apagar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= pessoa.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input class="form_dado_leitura" type="text" size="50" value="<%= pessoa.nome %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Apelido:</td>
+            <td><input class="form_dado_leitura" type="text" size="19" value="<%= pessoa.apelido %>" readonly /></td>
+          </tr>
+        </table>
+        <p>Tem certeza que deseja excluir o registro?</p>
+        <table>
+          <tr>
+            <td><a href="../editar/<%= pessoa.id %>"><button type="button">Voltar</button></a></td>
+            <td><input value="Confirmar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

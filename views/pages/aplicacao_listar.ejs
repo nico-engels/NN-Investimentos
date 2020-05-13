@@ -1,0 +1,100 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Aplicações - Listar</p>
+      <table class="filtro_tabela">
+        <tr>
+          <td class="fitro_titulo" colspan="2">Filtros</td>
+        </tr>
+        <tr>
+          <td>Pessoa</td>
+          <td>
+            <select onchange="window.location = '/aplicacoes/listar/' + this.value + '/<%= filtro_contas_sel %>/<%= filtro_classes_sel %>/<%= filtro_vigentes_sel %>/1'">
+              <option value="todos" <%= filtro_pessoas_sel == 'todos' ? 'selected' : '' %>>Todos</option>
+              <% for (var i = 0; i < filtro_pessoas.length; i++) { %>
+              <option value="<%= filtro_pessoas[i].id %>"
+                      <%= filtro_pessoas[i].id == filtro_pessoas_sel ? 'selected' : '' %>>
+                <%= filtro_pessoas[i].nome + ' (' + filtro_pessoas[i].apelido + ')' %>
+              </option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Conta</td>
+          <td>
+            <select onchange="window.location = '/aplicacoes/listar/<%= filtro_pessoas_sel %>/' + this.value + '/<%= filtro_classes_sel %>/<%= filtro_vigentes_sel %>/1'">
+              <option value="todos">Todos</option>
+              <% for (var i = 0; i < filtro_contas.length; i++) { %>
+              <option value="<%= filtro_contas[i].id %>"
+                      <%= filtro_contas[i].id == filtro_contas_sel ? 'selected' : '' %>>
+                <%= filtro_contas[i].desc_fmt %>
+              </option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Classe</td>
+          <td>
+            <select onchange="window.location = '/aplicacoes/listar/<%= filtro_pessoas_sel %>/<%= filtro_contas_sel %>/' + this.value + '/<%= filtro_vigentes_sel %>/1'">
+              <option value="todos" <%= filtro_classes_sel == 'todos' ? 'selected' : '' %>>Todas</option>
+              <% for (var i = 0; i < filtro_classes.length; i++) { %>
+              <option value="<%= filtro_classes[i].id %>"
+                      <%= filtro_classes[i].id == filtro_classes_sel ? 'selected' : '' %>>
+                <%= filtro_classes[i].desc %>
+              </option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Fim</td>
+          <td>
+            <input type="checkbox" id="fim_chk" <%= filtro_vigentes_sel == 'vigentes' ? 'checked' : '' %>
+                   onchange="window.location = '/aplicacoes/listar/<%= filtro_pessoas_sel %>/<%= filtro_contas_sel %>/<%= filtro_classes_sel %>/' + (this.checked ? 'vigentes' : 'todos' ) + '/1'" />
+            <label for="fim_chk">Apenas vigentes</label>
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table>
+        <tr class="listar_linha_cabecalho">
+          <td class="listar_cabecalho_selec"></td>
+          <td class="listar_cel">Conta</td>
+          <td class="listar_cel">Classe</td>
+          <td class="listar_cel">Nome</td>
+          <td class="listar_cel">Início</td>
+          <td class="listar_cel">Fim</td>
+          <td class="listar_cel">Dia Ref.</td>
+        </tr>
+        <% for (var i = 0; i < aplicacoes.length; i++) { %>
+        <tr class="listar_linha" onclick="window.location = '/aplicacoes/editar/<%= aplicacoes[i].id %>'"
+            onmouseenter="this.children[0].style.color = 'black'" onmouseleave="this.children[0].style.color = 'transparent'">
+          <td class="listar_cel_seta">&gt;</td>
+          <td class="listar_cel"><%= aplicacoes[i].conta_fmt %></td>
+          <td class="listar_cel"><%= aplicacoes[i].classe_fmt %></td>
+          <td class="listar_cel"><%= aplicacoes[i].nome %></td>
+          <td class="listar_cel"><%= aplicacoes[i].inicio_fmt %></td>
+          <td class="listar_cel"><%= aplicacoes[i].fim_fmt %></td>
+          <td class="listar_cel"><%= aplicacoes[i].dia_ref_fmt %></td>
+        </tr>
+        <% } %>
+        <tr class="listar_linha_rodape">
+          <td colspan="7">Página <%= n_paginas.atual %>/<%= n_paginas.num %> - Mostrando <%= n_paginas.por_pagina %> de <%= n_paginas.total %> registros.</td>
+        </tr>
+      </table>
+      <br />
+      <table>
+        <tr>
+          <td>Ir para a página:</td>
+          <td>
+            <select onchange="window.location = '/aplicacoes/listar/<%= filtro_pessoas_sel %>/<%= filtro_contas_sel %>/<%= filtro_classes_sel %>/<%= filtro_vigentes_sel %>/' + this.value">
+              <% for (var i = 1; i <= n_paginas.num; i++) { %>
+                <option value="<%= i %>" <%= (i == n_paginas.atual) ? 'selected' : '' %>><%= i %></option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <br/>
+      <a href="/"><button>Voltar</button></a>
+      <a href="/aplicacoes/cadastrar"><button>Cadastrar</button></a>

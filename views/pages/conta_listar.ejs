@@ -1,0 +1,35 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Contas - Listar</p>
+      <table>
+        <tr class="listar_linha_cabecalho">
+          <td class="listar_cabecalho_selec"></td>
+          <td class="listar_cel">Alias</td>
+          <td class="listar_cel">Pessoa</td>
+          <td class="listar_cel">Banco</td>
+          <td class="listar_cel">Agência</td>
+          <td class="listar_cel">Conta</td>
+          <td class="listar_cel">Início</td>
+          <td class="listar_cel">Fim</td>
+          <td class="listar_cel">Modalidade</td>
+        </tr>
+        <% for (var i = 0; i < contas.length; i++) { %>
+        <tr class="listar_linha" onclick="window.location = 'editar/<%= contas[i].id %>'"
+            onmouseenter="this.children[0].style.color = 'black'" onmouseleave="this.children[0].style.color = 'transparent'">
+          <td class="listar_cel_seta">&gt;</td>
+          <td class="listar_cel"><%= contas[i].alias %></td>
+          <td class="listar_cel"><%= contas[i].pessoa.apelido %></td>
+          <td class="listar_cel"><%= contas[i].banco_fmt %></td>
+          <td class="listar_cel"><%= contas[i].agencia %></td>
+          <td class="listar_cel"><%= contas[i].numero %></td>
+          <td class="listar_cel"><%= contas[i].inicio_fmt %></td>
+          <td class="listar_cel"><%= contas[i].fim_fmt %></td>
+          <td class="listar_cel"><%= contas[i].modalidade_fmt %></td>
+        </tr>
+        <% } %>
+        <tr class="listar_linha_rodape">
+          <td colspan="7">Mostrando <%= n_paginas.por_pagina %> de <%= n_paginas.total %> registros.</td>
+        </tr>
+      </table>
+      <br/>
+      <a href="/"><button>Voltar</button></a>
+      <a href="cadastrar"><button>Cadastrar</button></a>

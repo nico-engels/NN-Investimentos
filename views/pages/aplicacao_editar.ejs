@@ -1,0 +1,60 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Aplicações - Editar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= aplicacao.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Conta:</td>
+            <td colspan="3">
+              <select name="id_conta">
+                <option></option>
+                <% for (var i = 0; i < contas.length; i++) { %>
+                <option value="<%= contas[i].id %>" <%= contas[i].sel %>><%= contas[i].pessoa.apelido + ' - ' + contas[i].alias %></option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Classe:</td>
+            <td colspan="3">
+              <select name="classe">
+                <% for (var i = 0; i < classes_fmt.length; i++) { %>
+                <option value="<%= classes_fmt[i].id %>" <%= classes_fmt[i].sel %>><%= classes_fmt[i].desc %></option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input name="nome" type="text" size="16" maxlength="15" value="<%= aplicacao.nome %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Início:</td>
+            <td><input name="inicio" type="date" value="<%= aplicacao.inicio_fmt %>" /></td>
+            <td class="form_label">Fim:</td>
+            <td><input name="fim" type="date" value="<%= aplicacao.fim_fmt %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Dia Referência:</td>
+            <td colspan="3">
+              <select name="dia_ref">
+                <option></option>
+                <% for (var i = 0; i < dias_ref_fmt.length; i++) { %>
+                <option value="<%= dias_ref_fmt[i].id %>" <%= dias_ref_fmt[i].sel %>><%= dias_ref_fmt[i].desc %></option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><a href="../apagar/<%= aplicacao.id %>"><button type="button">Apagar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

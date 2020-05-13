@@ -1,0 +1,40 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Transferir - Listar</p>
+      <table>
+        <tr class="listar_linha_cabecalho">
+          <td class="listar_cabecalho_selec"></td>
+          <td class="listar_cel">Aplicação</td>
+          <td class="listar_cel">Data</td>
+          <td class="listar_cel">Entrada</td>
+          <td class="listar_cel">Saída</td>
+          <td class="listar_cel">Total Transferência</td>
+        </tr>
+        <% for (let i = 0; i < grupos_lcto.length; i++) {
+             let chave = grupos_lcto[i]
+             for (let j = 0; j < transferencias[chave].length; j++) { %>
+        <tr class="listar_linha" onclick="window.location = '/transferir/editar/<%= transferencias[chave][j].id %>'"
+          <% if (j == 0) { %>
+            onmouseenter="this.children[0].style.color = 'black'" onmouseleave="this.children[0].style.color = 'transparent'"
+          <% } %>>
+          <% if (j == 0) { %>
+            <td class="listar_cel_seta" rowspan="<%= transferencias[chave].length %>">&gt;</td>
+          <% } %>
+          <td class="listar_cel"><%= transferencias[chave][j].aplicacao_fmt %></td>
+          <% if (j == 0) { %>
+            <td class="listar_cel" rowspan="<%= transferencias[chave].length %>"><%= transferencias[chave][j].data_fmt %></td>
+          <% } %>
+          <td class="listar_cel_num"><%= transferencias[chave][j].entrada_fmt %></td>
+          <td class="listar_cel_num"><%= transferencias[chave][j].saida_fmt %></td>
+          <% if (j == 0) { %>
+            <td class="listar_cel_num" rowspan="<%= transferencias[chave].length %>"><%= transferencias[chave][j].total_transf_fmt %></td>
+          <% } %>
+        </tr>
+        <%   }
+           } %>
+        <tr class="listar_linha_rodape">
+          <td colspan="6">Mostrando <%= n_paginas.total %> registros.</td>
+        </tr>
+      </table>
+      <br/>
+      <a href="/"><button>Voltar</button></a>
+      <a href="/transferir/cadastrar"><button>Cadastrar</button></a>

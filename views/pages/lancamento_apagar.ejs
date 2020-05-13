@@ -1,0 +1,46 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Lançamentos - Apagar</p>
+      <form action="" method="POST">
+        <table>
+          <td class="form_label">ID:</td>
+          <td><input class="form_dado_leitura" type="text" size="3" value="<%= lancamento.id %>" readonly /></td>
+          <tr>
+            <td class="form_label">Aplicação:</td>
+            <td>
+              <select class="form_dado_leitura">
+                <option><%= lancamento.aplicacao_fmt %></option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Data:</td>
+            <td><input class="form_dado_leitura" type="date" value="<%= lancamento.data_fmt %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Natureza:</td>
+            <td>
+              <input name="natureza" type="radio" <%= lancamento.credito_chk %> readonly >Crédito</input>
+              <input name="natureza" type="radio" <%= lancamento.debito_chk %> readonly >Débito</input>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Tipo:</td>
+            <td>
+              <select class="form_dado_leitura">
+                <option><%= lancamento.tipo_fmt %></option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Valor:</td>
+            <td><input class="form_dado_leitura" type="text" size="11" maxlength="10" value="<%= lancamento.valor_fmt %>" readonly /></td>
+          </tr>
+        </table>
+        <p>Tem certeza que deseja excluir o registro?</p>
+        <table>
+          <tr>
+            <td><a href="../editar/<%= lancamento.id %>"><button type="button">Voltar</button></a></td>
+            <td><input value="Confirmar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

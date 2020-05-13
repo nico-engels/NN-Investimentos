@@ -1,0 +1,51 @@
+      <%- contentFor('body') %>
+      <p class="nome_modulo">Aplicações - Apagar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= aplicacao.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Conta:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura" >
+                <option><%= aplicacao.contum.pessoa.apelido + ' - ' + aplicacao.contum.alias %></option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Classe:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura" >
+                <option><%= aplicacao.classe_fmt %></option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input class="form_dado_leitura" type="text" size="16" maxlength="15" value="<%= aplicacao.nome %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Início:</td>
+            <td><input class="form_dado_leitura" type="date" value="<%= aplicacao.inicio_fmt %>" readonly /></td>
+            <td class="form_label">Fim:</td>
+            <td><input class="form_dado_leitura" type="date" value="<%= aplicacao.fim_fmt %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Dia Referência:</td>
+            <td colspan="3">
+              <select class="form_dado_leitura" >
+                <option><%= aplicacao.dia_ref_fmt %></option>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <p>Tem certeza que deseja excluir o registro?</p>
+        <table>
+          <tr>
+            <td><a href="../editar/<%= aplicacao.id %>"><button type="button">Voltar</button></a></td>
+            <td><input value="Confirmar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

@@ -1,0 +1,26 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Pessoas - Editar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= pessoa.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input name="nome" type="text" size="50" value="<%= pessoa.nome %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Apelido:</td>
+            <td><input name="apelido" type="text" size="8" maxlength="7" value="<%= pessoa.apelido %>" /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><a href="/pessoas/apagar/<%= pessoa.id %>"><button type="button">Apagar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

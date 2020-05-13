@@ -1,0 +1,115 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Depositar - Cadastrar</p>
+      <form action="../" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">Data:</td>
+            <td><input name="data" type="date" value="<%= data_ref %>" onblur="window.location = '../' + this.value + '/<%= pessoas_sel %>'" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Pessoa:</td>
+            <td>
+              <select onchange="window.location = '../<%= data_ref %>/' + this.value %>">
+                <option value="todos" <%= pessoas_sel == 'todos' ? 'selected' : '' %>>Todos</option>
+                <% for (var i = 0; i < pessoas.length; i++) { %>
+                <option value="<%= pessoas[i].id %>"
+                        <%= pessoas[i].id == pessoas_sel ? 'selected' : '' %>>
+                  <%= pessoas[i].nome + ' (' + pessoas[i].apelido + ')' %>
+                </option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Aplicação:</td>
+            <td>
+              <select name="id_aplicacao" onchange="aplicacao_onchange(this)" >
+              <% for (var i = 0; i < aplicacoes.length; i++) { %>
+                <option value="<%= aplicacoes[i].id %>"
+                        data-saldo="<%= aplicacoes[i].saldo_fmt %>"
+                        data-id_conta="<%= aplicacoes[i].id_conta %>"
+                        data-poup="<%= aplicacoes[i].poup %>">
+                <%= aplicacoes[i].nome_fmt %></option>
+              <% } %>
+              </select>
+            </td>
+            <td>
+              <% for (let j = 0; j < Object.keys(mesversarios_poup).length; j++) {
+                   let id_conta = Object.keys(mesversarios_poup)[j] %>
+              <select id="cta<%= id_conta %>_apl_dia_ref" name="cta<%= id_conta %>_apl_dia_ref" onchange="apl_dia_ref_onchange(this)"
+                      style="display:<%= aplicacoes[0].id == id_conta ? 'inline' : 'none' %>">
+                <% for (let i = 0; i < mesversarios_poup[id_conta].length; i++) { %>
+                  <option value="<%= mesversarios_poup[id_conta][i].id %>"
+                          data-saldo="<%= mesversarios_poup[id_conta][i].saldo_fmt %>">
+                    <%= mesversarios_poup[id_conta][i].dia_ref %>
+                  </option>
+                <% } %>
+                  <option value="0" data-saldo="0,00">Nova</option>
+              </select>
+              <% } %>
+              <select id="aplicacao_dia_ref" name="aplicacao_dia_ref" style="display:none">
+              <% for (let i = 0; i < aplicacao_dias_ref.length; i++) { %>
+                <option value="<%= aplicacao_dias_ref[i].id %>"><%= aplicacao_dias_ref[i].desc %></option>
+              <% } %>
+              </select>
+            </td>
+            <td class="form_label">Saldo na data:</td>
+            <td><input id="saldo_atual" class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="<%= aplicacoes[0].saldo_fmt %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Valor:</td>
+            <td><input id="entrada" name="entrada" class="form_dado_numero" type="text" size="11" maxlength="10" value="0,00"
+                       onchange="calcula_saldo_final()" /></td>
+            <td></td>
+            <td class="form_label">Saldo final:</td>
+            <td><input id="saldo_final" class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="<%= aplicacoes[0].saldo_fmt %>" readonly /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><a href="/"><button type="button">Voltar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>
+      <script>
+        const ptbr_nfmt = new Intl.NumberFormat('pt-BR', { style: 'decimal', minimumFractionDigits: 2 })
+        function calcula_saldo_final() {
+          var saldo_atual = Number(document.getElementById('saldo_atual').value.replace('.', '').replace(',', '.'))
+          var entrada =     Number(document.getElementById('entrada').value.replace('.', '').replace(',', '.'))
+          document.getElementById('saldo_final').value = ptbr_nfmt.format(saldo_atual + entrada)
+        }
+        function aplicacao_onchange(event) {
+          let calc_saldo = 1
+          for (let i = 0; i < event.options.length; i++) {
+            if (event.options[i].dataset.poup == 1)
+            {
+              let id_opt = 'cta' + event.options[i].dataset.id_conta + '_apl_dia_ref'
+              if (i == event.selectedIndex)
+              {
+                document.getElementById(id_opt).style.display = 'inline'
+                apl_dia_ref_onchange(document.getElementById(id_opt))
+                calc_saldo = 0
+              }
+              else
+                document.getElementById(id_opt).style.display = 'none'
+            }
+          }
+
+          if (calc_saldo)
+          {
+            document.getElementById('saldo_atual').value = event.options[event.selectedIndex].dataset.saldo
+            calcula_saldo_final()
+          }
+        }
+        function apl_dia_ref_onchange(event) {
+          if (event.options[event.selectedIndex].value == 0)
+            document.getElementById('aplicacao_dia_ref').style.display = 'inline'
+          else
+            document.getElementById('aplicacao_dia_ref').style.display = 'none'
+
+          document.getElementById('saldo_atual').value = event.options[event.selectedIndex].dataset.saldo
+          calcula_saldo_final()
+        }
+      </script>

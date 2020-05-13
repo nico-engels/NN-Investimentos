@@ -1,0 +1,23 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Pessoas - Listar</p>
+      <table>
+        <tr class="listar_linha_cabecalho">
+          <td class="listar_cabecalho_selec"></td>
+          <td class="listar_cel">Nome</td>
+          <td class="listar_cel">Apelido</td>
+        </tr>
+        <% for (var i = 0; i < pessoas.length; i++) { %>
+        <tr class="listar_linha" onclick="window.location = 'editar/<%= pessoas[i].id %>'"
+            onmouseenter="this.children[0].style.color = 'black'" onmouseleave="this.children[0].style.color = 'transparent'">
+          <td class="listar_cel_seta">&gt;</td>
+          <td class="listar_cel"><%= pessoas[i].nome %></td>
+          <td class="listar_cel"><%= pessoas[i].apelido %></td>
+        </tr>
+        <% } %>
+        <tr class="listar_linha_rodape">
+          <td colspan="7">Mostrando <%= n_paginas.por_pagina %> de <%= n_paginas.total %> registros.</td>
+        </tr>
+      </table>
+      <br/>
+      <a href="/"><button>Voltar</button></a>
+      <a href="cadastrar"><button>Cadastrar</button></a>

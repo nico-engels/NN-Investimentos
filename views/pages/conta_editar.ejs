@@ -1,0 +1,74 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Contas - Editar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">ID:</td>
+            <td><input class="form_dado_leitura" type="text" size="3" value="<%= conta.id %>" readonly /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Alias:</td>
+            <td colspan="3"><input name="alias" type="text" size="16" maxlength="15" value="<%= conta.alias%>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Pessoa:</td>
+            <td colspan="3">
+              <select name="id_pessoa">
+              <% for (var i = 0; i < pessoas.length; i++) { %>
+                <option value="<%= pessoas[i].id %>" <%= pessoas[i].sel %>><%= pessoas[i].apelido %> (<%= pessoas[i].nome %>)</option>
+              <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Banco:</td>
+            <td colspan="3">
+              <select name="id_banco">
+                <option></option>
+                <% for (var i = 0; i < bancos.length; i++) { %>
+                <option value="<%= bancos[i].id %>" <%= bancos[i].sel %>><%= bancos[i].codigo %> - <%= bancos[i].nome %></option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Agência:</td>
+            <td><input name="agencia" type="text" size="8" maxlength="10" value="<%= conta.agencia %>" /></td>
+            <td class="form_label">Conta:</td>
+            <td><input name="numero" type="text" size="11" maxlength="10" value="<%= conta.numero %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Início:</td>
+            <td><input name="inicio" type="date" value="<%= conta.inicio_fmt %>" /></td>
+            <td class="form_label">Fim:</td>
+            <td><input name="fim" type="date" value="<%= conta.fim_fmt %>" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Modalidade:</td>
+            <td colspan="3">
+              <select name="modalidade">
+                <% for (var i = 0; i < modalidades.length; i++) { %>
+                <option value="<%= modalidades[i].id %>" <%= modalidades[i].sel %></option><%= modalidades[i].desc %></option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Aplicação Padrão<br/>para Depósitos:</td>
+            <td colspan="3">
+              <select name="apl_padrao">
+                <% for (var i = 0; i < aplicacao_classes.length; i++) { %>
+                <option value="<%= aplicacao_classes[i].id %>" <%= aplicacao_classes[i].sel %>><%= aplicacao_classes[i].desc %></option>
+                <% } %>
+              </select>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><a href="../apagar/<%= conta.id %>"><button type="button">Apagar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

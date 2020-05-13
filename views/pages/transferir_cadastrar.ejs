@@ -1,0 +1,153 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Transferência - Cadastrar</p>
+      <form action="." method="POST">
+        <table>
+          <tr>
+            <td class="form_label">Data:</td>
+            <td><input name="data" type="date" value="<%= data_ref %>" onblur="window.location = this.value" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">De:</td>
+            <td>
+              <button type="button" title="Novo Item" onclick="adc_apl()">+</button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <table id="aplicacoes_de">
+                <tr>
+                  <td class="form_label_subtabela">Aplicação</td>
+                  <td class="form_label_subtabela">Saldo</td>
+                  <td class="form_label_subtabela">Valor</td>
+                  <td class="form_label_subtabela">Saldo final</td>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="ids_aplicacao_de" onchange="aplicacao_onchange(this, 'de')">
+                      <% for (let i = 0; i < aplicacoes.length; i++) { %>
+                      <option value="<%= aplicacoes[i].id %>"
+                              data-saldo="<%= aplicacoes[i].saldo_fmt %>"
+                              ><%= aplicacoes[i].nome_fmt %></option>
+                      <% } %>
+                    </select>
+                  </td>
+                  <td>
+                    <input class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="0,00" readonly />
+                  </td>
+                  <td>
+                    <input name="valores_aplicacao_de" class="form_dado_numero" type="text" size="11" maxlength="10" value="0,00" onchange="chg_valor_apl(this)" />
+                  </td>
+                  <td>
+                    <input class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="0,00" readonly />
+                  </td>
+                  <td><button type="button" title="Remover Item" onclick="rmv_apl(this)">-</button></td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="form_label_subtabela_tot">Total</td>
+                  <td>
+                    <input id="aplicacoes_de_tot" class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="0,00" readonly />
+                  </td>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_label">Para:</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <table id="aplicacoes_para">
+                <tr>
+                  <td class="form_label_subtabela">Aplicação</td>
+                  <td class="form_label_subtabela">Saldo</td>
+                  <td class="form_label_subtabela">Valor</td>
+                  <td class="form_label_subtabela">Saldo final</td>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="id_aplicacao_para" onchange="aplicacao_onchange(this, 'para')">
+                      <% for (let i = 0; i < aplicacoes.length; i++) { %>
+                      <option value="<%= aplicacoes[i].id %>"
+                              data-saldo="<%= aplicacoes[i].saldo_fmt %>"><%= aplicacoes[i].nome_fmt %></option>
+                      <% } %>
+                    </select>
+                  </td>
+                  <td>
+                    <input class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="0,00" readonly />
+                  </td>
+                  <td>
+                    <input id="valor_aplicacao_para" class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="0,00" readonly />
+                  </td>
+                  <td>
+                    <input class="form_dado_numero form_dado_leitura" type="text" size="11" maxlength="10" value="0,00" readonly />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><a href="/"><button type="button">Voltar</button></a></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>
+      <script>
+        const ptbr_nfmt = new Intl.NumberFormat('pt-BR', { style: 'decimal', minimumFractionDigits: 2 })
+
+        function adc_apl()
+        {
+          let tabela = document.getElementById('aplicacoes_de').children[0]
+          let linha  = document.createElement('tr')
+
+          linha.innerHTML = tabela.rows[1].innerHTML
+          tabela.insertBefore(linha, tabela.rows[tabela.rows.length - 1])
+        }
+        function rmv_apl(e)
+        {
+          let tabela = e.parentElement.parentElement.parentElement
+          let linha  = e.parentElement.parentElement
+          if (tabela.rows.length > 3)
+          {
+            tabela.removeChild(linha)
+            tot_apl()
+            saldo_final(document.getElementById('aplicacoes_para').rows[1], 'para')
+          }
+          else
+            alert('Deve existir pelo menos uma aplicação \'De\' na transferência!')
+        }
+        function chg_valor_apl(e)
+        {
+          tot_apl()
+          saldo_final(e.parentElement.parentElement, 'de')
+          saldo_final(document.getElementById('aplicacoes_para').rows[1], 'para')
+        }
+        function tot_apl()
+        {
+          let tabela = document.getElementById('aplicacoes_de').children[0]
+          let soma = 0
+          for (let i = 1; i < tabela.rows.length - 1; i++)
+            soma += Number(tabela.rows[i].cells[2].children[0].value.replace('.', '').replace(',', '.'))
+
+          document.getElementById('aplicacoes_de_tot').value    = ptbr_nfmt.format(soma)
+          document.getElementById('valor_aplicacao_para').value = ptbr_nfmt.format(soma)
+        }
+        function aplicacao_onchange(e, qual)
+        {
+          let linha = e.parentElement.parentElement
+          linha.cells[1].children[0].value = e.options[e.selectedIndex].dataset.saldo
+          saldo_final(linha, qual)
+        }
+        function saldo_final(linha, qual)
+        {
+          let saldo = Number(linha.cells[1].children[0].value.replace('.', '').replace(',', '.'))
+          let valor = Number(linha.cells[2].children[0].value.replace('.', '').replace(',', '.'))
+          if (qual == 'de')
+            linha.cells[3].children[0].value = ptbr_nfmt.format(saldo - valor)
+          else
+            linha.cells[3].children[0].value = ptbr_nfmt.format(saldo + valor)
+        }
+      </script>

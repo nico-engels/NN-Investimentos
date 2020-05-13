@@ -1,0 +1,25 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Bancos - Cadastrar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">Código:</td>
+            <td><input name="cod" type="text" size="5" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input name="nome" type="text" size="50" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">CNPJ:</td>
+            <td><input name="cnpj" type="text" size="19" maxlength="18" /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>

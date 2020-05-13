@@ -1,0 +1,21 @@
+<%- contentFor('body') %>
+      <p class="nome_modulo">Pessoas - Cadastrar</p>
+      <form action="" method="POST">
+        <table>
+          <tr>
+            <td class="form_label">Nome:</td>
+            <td><input name="nome" type="text" size="50" /></td>
+          </tr>
+          <tr>
+            <td class="form_label">Apelido:</td>
+            <td><input name="apelido" type="text" size="8" maxlength="7" /></td>
+          </tr>
+        </table>
+        <br />
+        <table>
+          <tr>
+            <td><button onclick="window.history.back()">Voltar</button></td>
+            <td><input value="Gravar" type="submit" /></td>
+          </tr>
+        </table>
+      </form>
