@@ -106,3 +106,4 @@ dist
 # Dados
 sql/dados.sql
 sql/.*nn_inv_bd.js
+sql/nn-inv exp_bd/*.*
