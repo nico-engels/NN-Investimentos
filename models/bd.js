@@ -1,9 +1,9 @@
 const seq = require('sequelize')
 
 // BD
-const banco_dados = new seq('nn_inv', 'nninv_nodeusr', '123', {
-  host: 'localhost',
-  dialect: 'mysql'
+const banco_dados = new seq('nn_inv', 'root', '', {
+  storage: 'sequelize.sqlite',
+  dialect: 'sqlite'
 })
 
 // Exports
