@@ -9,7 +9,6 @@ const banco      = require('../models/banco')
 const conta      = require('../models/conta')
 const pessoa     = require('../models/pessoa')
 const lancamento = require('../models/lancamento')
-const operacao   = require('../models/operacao')
 
 // Criação tabelas
 console.log('Banco de Dados nn_inv - Criação e Inserção dos Dados\n' +

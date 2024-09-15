@@ -239,6 +239,7 @@ const func_lancamento = function(app) {
           dado.aplicacao_fmt += ' (' + dado.aplicacao.contum.pessoa.apelido + ') '
 
         // Data, tipo e valores
+        console.log(`aaa ${dado.data.constructor.name}`)
         dado.data_fmt = util.strISODateBR(dado.data)
         dado.tipo_fmt = tipos.find((tipo) => tipo.id == dado.tipo).desc
         dado.entrada_fmt = ptbr_nfmt.format(dado.entrada)
@@ -315,7 +316,7 @@ const func_lancamento = function(app) {
             n_paginas: n_paginas,
             filtro_pessoas: prms[0],
             filtro_pessoas_sel: req.params.n_pessoa,
-            filtro_conta_sel: req.params.n_conta,
+            filtro_contas_sel: req.params.n_conta,
             filtro_contas: prms[1],
             filtro_aplicacoes_sel: req.params.n_aplicacao,
             filtro_aplicacoes: prms[2],

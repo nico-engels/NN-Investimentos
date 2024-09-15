@@ -26,7 +26,6 @@ const func_transferir = require('./func_transferir')
 
 // Livro Diário
 const func_lancamento = require('./func_lancamento').func_lancamento
-const func_operacao   = require('./func_operacao')
 
 // View
 app.set('view engine', 'ejs')
@@ -51,7 +50,6 @@ func_depositar(app)
 func_transferir(app)
 
 func_lancamento(app)
-func_operacao(app)
 
 // main
 const porta = 1234;
