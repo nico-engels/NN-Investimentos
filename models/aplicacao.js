@@ -4,7 +4,7 @@ const tb_conta = require('./conta')
 
 const tb_aplicacao = bd.banco_dados.define('aplicacao', {
   classe:  { type: bd.seq.INTEGER },
-  nome:    { type: bd.seq.STRING(15) },
+  alias:   { type: bd.seq.STRING(15) },
   inicio:  { type: bd.seq.DATE, allowNull: false },
   fim:     { type: bd.seq.DATE },
   dia_ref: { type: bd.seq.INTEGER }

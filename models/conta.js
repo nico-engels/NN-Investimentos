@@ -4,13 +4,14 @@ const tb_banco  = require('./banco')
 const tb_pessoa = require('./pessoa')
 
 const tb_conta = bd.banco_dados.define('conta', {
-  alias:      { type: bd.seq.STRING(15), allowNull: false },
-  agencia:    { type: bd.seq.STRING(10) },
-  numero:     { type: bd.seq.STRING(20) },
-  inicio:     { type: bd.seq.DATE, allowNull: false },
-  fim:        { type: bd.seq.DATE },
-  modalidade: { type: bd.seq.INTEGER, allowNull: false },
-  apl_padrao: { type: bd.seq.INTEGER, allowNull: false },
+  alias:          { type: bd.seq.STRING(15), allowNull: false },
+  agencia:        { type: bd.seq.STRING(10) },
+  numero:         { type: bd.seq.STRING(20) },
+  inicio:         { type: bd.seq.DATE, allowNull: false },
+  fim:            { type: bd.seq.DATE },
+  modalidade:     { type: bd.seq.INTEGER, allowNull: false },
+  apl_padrao:     { type: bd.seq.INTEGER, allowNull: false },
+  exibir_tr_rend: { type: bd.seq.INTEGER },
 }, { underscored: true, freezeTableName: true })
 
 tb_conta.belongsTo(tb_pessoa, {

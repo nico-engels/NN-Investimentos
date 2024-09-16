@@ -1,16 +1,16 @@
 // Constantes
 const classes = [
   { id:  1, desc: 'Saldo' },
-  { id:  2, desc: 'Mesversário Poupança' },
-  { id:  3, desc: 'LCI' },
-  { id:  4, desc: 'LCA' },
-  { id:  5, desc: 'CDB' },
-  { id:  6, desc: 'RDB' },
-  { id:  7, desc: 'Câmbio' },
-  { id:  8, desc: 'FII' },
-  { id:  9, desc: 'Ação' },
-  { id: 10, desc: 'Fundo' },
-  { id: 11, desc: 'Mesversário FGTS' },
+  { id:  2, desc: 'Mesversário FGTS' },
+  { id:  3, desc: 'Mesversário' },
+  { id:  4, desc: 'LCI' },
+  { id:  5, desc: 'LCA' },
+  { id:  6, desc: 'CDB' },
+  { id:  7, desc: 'RDB' },
+  { id:  8, desc: 'Câmbio' },
+  { id:  9, desc: 'FII' },
+  { id: 10, desc: 'Ação' },
+  { id: 11, desc: 'Fundo' },
 ]
 
 // Constantes
@@ -48,7 +48,7 @@ const func_aplicacao = function(app) {
     var nova = {
       id_conta: req.body.id_conta,
       classe:   req.body.classe,
-      nome:     req.body.nome,
+      alias:    req.body.alias,
       inicio:   req.body.inicio
     }
     if (req.body.dia_ref)
@@ -120,7 +120,7 @@ const func_aplicacao = function(app) {
     var atualizado = {
       id_conta: req.body.id_conta,
       classe:   req.body.classe,
-      nome:     req.body.nome,
+      alias:    req.body.alias,
       inicio:   req.body.inicio,
       dia_ref:  req.body.dia_ref
     }
@@ -174,7 +174,7 @@ const func_aplicacao = function(app) {
     tb_aplicacao.findAll({
       limit: n_elem_pagina,
       offset: (req.params.n_pagina - 1) * n_elem_pagina,
-      order: [['id_conta', 'ASC'], ['dia_ref', 'ASC'], ['inicio', 'ASC'], ['nome', 'ASC'], ['id', 'ASC']],
+      order: [['id_conta', 'ASC'], ['dia_ref', 'ASC'], ['inicio', 'ASC'], ['alias', 'ASC'], ['id', 'ASC']],
       where: filtro_lista_aplicacao,
       include: [{
         model: tb_conta,

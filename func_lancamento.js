@@ -1,4 +1,5 @@
 // Constantes
+/*
 const tipos = [
   // Crédito
   { id: 001, desc: 'Depósito' },
@@ -22,6 +23,38 @@ const tipos = [
   { id: 202, desc: 'Resgate' },
   { id: 203, desc: 'Resgate Parcial' },
   { id: 204, desc: 'Inventário' },
+]
+*/
+
+const tipos = [
+  // Crédito
+  { id:  1, desc: 'Depósito' },
+  { id:  2, desc: 'Juros' },
+  { id:  3, desc: 'Bônus' },
+  { id:  4, desc: 'Valorização' },
+  { id:  5, desc: 'Aluguel' },
+  { id:  6, desc: 'Dividendos' },
+  { id:  7, desc: 'JSCP' },
+  { id:  8, desc: 'Reajuste TR' },
+  { id:  9, desc: 'Venda' },
+  { id: 10, desc: 'Transferência' },
+  { id: 11, desc: 'Aplicação' },
+  { id: 12, desc: 'Resgate' },
+  { id: 13, desc: 'Resgate Parcial' },
+  { id: 25, desc: 'Compra Ativo' },
+  { id: 14, desc: 'Inventário' },
+// Débito
+  { id: 15, desc: 'Saque' },
+  { id: 16, desc: 'Desvalorização' },
+  { id: 17, desc: 'IR' },
+  { id: 18, desc: 'Compra Ativo' },
+  { id: 19, desc: 'Corretagem' },
+  { id: 20, desc: 'Transferência' },
+  { id: 21, desc: 'Aplicação' },
+  { id: 22, desc: 'Resgate' },
+  { id: 23, desc: 'Resgate Parcial' },
+  { id: 24, desc: 'Inventário' },
+  { id: 26, desc: 'Venda' }
 ]
 
 const func_lancamento = function(app) {
@@ -239,7 +272,6 @@ const func_lancamento = function(app) {
           dado.aplicacao_fmt += ' (' + dado.aplicacao.contum.pessoa.apelido + ') '
 
         // Data, tipo e valores
-        console.log(`aaa ${dado.data.constructor.name}`)
         dado.data_fmt = util.strISODateBR(dado.data)
         dado.tipo_fmt = tipos.find((tipo) => tipo.id == dado.tipo).desc
         dado.entrada_fmt = ptbr_nfmt.format(dado.entrada)
